@@ -34,7 +34,7 @@ export default {
     },
     async deleteTask(id){
       if(confirm('Are You sure?')){
-        const res = await fetch(`api/tasks/${id}` , {
+        const res = await fetch(`https://task-tracker-backend2.herokuapp.com/tasks/${id}` , {
           method : 'DELETE',
 
         })
@@ -46,7 +46,7 @@ export default {
       const taskToToggle = await this.fetchTask(id)
       const updTask = {...taskToToggle , reminder : !taskToToggle.reminder}
 
-      const res = await fetch(`api/tasks/${id}`,{
+      const res = await fetch(`https://task-tracker-backend2.herokuapp.com/tasks/${id}`,{
         method:'PUT',
         headers:{
           'Content-type' : 'application/json'
@@ -57,7 +57,7 @@ export default {
       this.tasks = this.tasks.map((task) => task.id === id ? {...task , reminder: data.reminder} : task)
     },
     async AddTask(task){
-      const res = await fetch('api/tasks' , {
+      const res = await fetch('https://task-tracker-backend2.herokuapp.com/tasks' , {
         method: 'POST',
         headers:{
           'Content-type' : 'application/json'
@@ -69,13 +69,13 @@ export default {
       this.tasks = [...this.tasks , data]
     },
     async fetchTasks(){
-      const res = await fetch('api/tasks') 
+      const res = await fetch('https://task-tracker-backend2.herokuapp.com/tasks') 
       const data = await res.json() 
       
       return data
     },
     async fetchTask(id){
-      const res = await fetch(`api/tasks/${id}`) 
+      const res = await fetch(`https://task-tracker-backend2.herokuapp.com/tasks/${id}`) 
       const data = await res.json() 
 
       return data
